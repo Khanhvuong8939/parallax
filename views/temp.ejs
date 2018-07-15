@@ -1,0 +1,58 @@
+<html>
+<head>
+    <script src="/assets/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+<form action="" id="imgur" method="#">
+    <h3>Photography</h3>
+    <p>Image 1</p><input type="file" class="image1" accept="image/*" data-max-size="5000"/>
+    <p>Image 2</p><input type="file" class="image2" accept="image/*" data-max-size="5000"/>
+    <p>Image 3</p><input type="file" class="image3" accept="image/*" data-max-size="5000"/>
+    <button class="uploadImg1">Upload</button>
+</form>
+
+<form method="post" action="/users/login">
+    <p>Username</p><input type="text" class="" name="username">
+    <p>Password</p><input type="paswword" class="" name="password"><br>
+    <button type="submit">Test add</button>
+</form>
+<%if(message != 'undefined'){%>
+<%=message%>
+<%}%>
+
+<script>
+    var data = new Array();
+    $.ajax({
+        type:'GET',
+        url: 'users/getPhotographyUrl',
+        success: (response)=>{
+            data = response;
+            console.log(data[0].url);
+            let insert = '';
+            insert += "<div class=\"col-md-4 photography\">";
+            insert += "<a href=\"single-project.html\" class=\"portfolio_item work-grid\">";
+            insert += "<img src=\"" + data[0].url + "\" alt=\"image\">";
+            insert += "<div class=\"portfolio_item_hover\">";
+            insert += "<div class=\"item_info\">";
+            insert += "<span>Brave man</span>";
+            insert += "<span>Brave man</span>";
+            insert += "<em>photography</em>";
+            insert += "</div>";
+            insert += "</div>";
+            insert += "</a>";
+            insert += " </div;>";
+            console.log(insert);
+            $('.row.portfolio_container').after(insert);
+            //$(insert).insertAfter('.row portfolio_container');
+
+        }
+
+    });
+    console.log(data);
+</script>
+
+
+</body>
+</html>
+
